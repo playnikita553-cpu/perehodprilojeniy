@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">perehodprilojeniy</string>
+    <string name="infoOfUser">Информация о пользователе</string>
+    <string name="buttonSave">Сохранить</string>
+    <string name="greyTextSite">Сайт</string>
+    <string name="greyTextPhone">Телефон</string>
+    <string name="greyTextAdress">Адрес</string>
+    <string name="greyTextAge">Возраст</string>
+    <string name="greyTextName">Имя</string>
+    <string name="greyTextFamiliya">Фамилия</string>
+</resources>
