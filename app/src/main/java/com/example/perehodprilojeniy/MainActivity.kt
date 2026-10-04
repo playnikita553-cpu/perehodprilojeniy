@@ -20,8 +20,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     companion object {
-        const val REQUEST_CODE = 1
+        const val User_info= "user_info"
+        const val edit = 1
+        const val add = 2
     }
+    var userlist = arrayListOf<User>()
+    var position:Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,49 +43,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.addressTwo.doAfterTextChanged { text ->
-            if (text.isNullOrEmpty()) {
-                binding.btnAddress.visibility = View.GONE
-            } else {
-                binding.btnAddress.visibility = View.VISIBLE
-            }
 
-        }
-
-
-        binding.phoneTwo.doAfterTextChanged { text ->
-            if(text.isNullOrEmpty()){
-                binding.btnPhone.visibility = View.GONE
-            }
-            else{
-                binding.btnPhone.visibility = View.VISIBLE
-            }
-        }
-
-        binding.siteTwo.doAfterTextChanged { text ->
-            if(text.isNullOrEmpty()){
-                binding.btnSite.visibility = View.GONE
-            }
-            else{
-                binding.btnSite.visibility = View.VISIBLE
-            }
-        }
-        binding.btnAddress.setOnClickListener(){
-            val address = binding.addressTwo.text.toString()
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$address"))
-            startActivity(intent)
-        }
-        binding.btnPhone.setOnClickListener() {
-            val phone = binding.phoneTwo.text.toString()
-            val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:$phone")
-            startActivity(intent)
-        }
-        binding.btnSite.setOnClickListener {
-            val site = binding.siteTwo.text.toString()
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://$site"))
-            startActivity(intent)
-        }
 
 
     }
