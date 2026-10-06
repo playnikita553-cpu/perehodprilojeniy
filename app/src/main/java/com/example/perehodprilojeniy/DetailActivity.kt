@@ -4,6 +4,7 @@ package com.example.perehodprilojeniy
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -18,7 +19,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     companion object {
-        const val REQUEST_CODE = 1
+        const val EDIT_USER = "edit_user"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,37 @@ class DetailActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        if (intent.extras != null) {
+
+            val selectedUser: User = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getSerializableExtra(MainActivity.USER_INFO, User::class.java) as User
+            } else {
+                intent.getSerializableExtra(MainActivity.USER_INFO) as User
+            }
+
+
+            binding.familiaTwo.setText(selectedUser.lastName)
+            binding.nameTwo.setText(selectedUser.firstName)
+            binding.ageTwo.setText(selectedUser.age.toString())
+            binding.phoneTwo.setText(selectedUser.phone)
+            binding.addressTwo.setText(selectedUser.adress)
+            binding.siteTwo.setText(selectedUser.site)
+        }
+
+        binding.btnSave.setOnClickListener {
+            val newUser = User(
+                lastName = binding.familiaTwo.text.toString(),
+                firstName = binding.nameTwo.text.toString(),
+                age = binding.ageTwo.text.toString().toInt(),
+                phone = binding.phoneTwo.text.toString(),
+                adress = binding.addressTwo.text.toString(),
+                site = binding.siteTwo.text.toString()
+            )
+            val intent = Intent()
+            intent.putExtra(EDIT_USER, newUser)
+            setResult(RESULT_OK, intent)
+            finish()
         }
 
         binding.addressTwo.doAfterTextChanged { text ->

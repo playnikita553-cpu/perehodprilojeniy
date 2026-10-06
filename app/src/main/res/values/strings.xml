@@ -8,4 +8,6 @@
     <string name="greyTextAge">Возраст</string>
     <string name="greyTextName">Имя</string>
     <string name="greyTextFamiliya">Фамилия</string>
+    <string name="titleList">Список пользователей</string>
+    <string name="addUser">Добавить пользователя</string>
 </resources>
